@@ -30,9 +30,9 @@ def sorted_number(request):
         'message': 'Lista de numeros ordenados'
     }
     # Una manera de responder en json con Django JsonResponse
-    # return JsonResponse(data)
+    return JsonResponse(data)
     # Otra manera con Django HttpResponse y python json.dumps
-    return HttpResponse(json.dumps(data, indent=4), content_type='application/json')
+    # return HttpResponse(json.dumps(data, indent=4), content_type='application/json')
 
 
 def say_hi(request, name, age):
