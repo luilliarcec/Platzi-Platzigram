@@ -19,9 +19,9 @@ from django.urls import path
 # Django
 from . import views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello-world/', views.hello_world),
-    path('hi/', views.hi),
+    path('sorted/', views.sorted_number),
+    path('hi/<str:name>/<int:age>', views.say_hi),
 ]
