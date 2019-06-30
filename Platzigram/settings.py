@@ -137,3 +137,8 @@ STATICFILES_FINDERS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Login Urls
+# https://docs.djangoproject.com/en/2.2/topics/auth/default/#django.contrib.auth.logout
+
+LOGIN_URL = '/users/login'
