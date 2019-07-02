@@ -10,6 +10,11 @@ from users.models import Profile
 
 
 # Create your views here.
+def update_profile(request):
+    """Update profile View"""
+    return render(request, 'users/update-profile.html')
+
+
 def login_view(request):
     """Login View"""
     if request.method == 'POST':
