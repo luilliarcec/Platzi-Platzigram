@@ -1,5 +1,82 @@
 {% extends 'layout.html' %}
 
+{% load static %}
+
 {% block container %}
-    <h1 class="mt-5">@{{ request.user.username }}</h1>
+    <div class="container">
+
+        <div class="row justify-content-md-center">
+            <div class="col-6 p-4" id="profile-box">
+
+                <form action="{% url 'update_profile' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="media">
+                        {% if profile.picture %}
+                            <img src="{{ profile.picture.url }}" class="rounded-circle" height="50" alt=""/>
+                        {% else %}
+                            <img src="{% static 'img/default-profile.png' %}" class="rounded-circle" height="50"
+                                 alt=""/>
+                        {% endif %}
+
+                        <div class="media-body">
+                            <h5 class="ml-4">@{{ user.username }} | {{ user.get_full_name }}</h5>
+                            <div class="custom-file ml-4 col-11">
+                                <input type="file"
+                                       class="custom-file-input{% if form.picture.errors %} is-invalid {% endif %}"
+                                       id="picture" lang="es" name="picture">
+                                <label class="custom-file-label" for="picture">Seleccionar Archivo</label>
+                                <div class="invalid-feedback">
+                                    {{ form.picture.errors }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group mt-5">
+                        <label for="website">Website</label>
+                        <input class="form-control{% if form.website.errors %} is-invalid {% endif %}" type="url"
+                               name="website" placeholder="Website"
+                               value="{{ form.website.value }}" id="website"/>
+                        <div class="invalid-feedback">
+                            {{ form.website.errors }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="biography">Biografía</label>
+                        <textarea class="form-control{% if form.biography.errors %} is-invalid {% endif %}"
+                                  name="biography"
+                                  id="biography">{{ form.biography.value }}</textarea>
+                        <div class="invalid-feedback">
+                            {{ form.biography.errors }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone_number">Celular</label>
+                        <input class="form-control{% if form.phone_number.errors %} is-invalid {% endif %}"
+                               type="number" name="phone_number" placeholder="Phone number"
+                               value="{{ form.phone_number.value }}" id="phone_number"/>
+                        <div class="invalid-feedback">
+                            {{ form.phone_number.errors }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-5">Actualizar perfil</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/bs-custom-file-input.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        });
+    </script>
 {% endblock %}
