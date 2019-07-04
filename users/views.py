@@ -32,6 +32,7 @@ def update_profile(request):
         form = ProfileForm()
 
     return render(request, 'users/update-profile.html', {
+        'profile': profile,
         'form': form
     })
 

@@ -19,12 +19,13 @@
                                  alt=""/>
                         {% endif %}
 
+                        {# Picture #}
                         <div class="media-body">
                             <h5 class="ml-4">@{{ user.username }} | {{ user.get_full_name }}</h5>
                             <div class="custom-file ml-4 col-11">
                                 <input type="file"
                                        class="custom-file-input{% if form.picture.errors %} is-invalid {% endif %}"
-                                       id="picture" lang="es" name="picture">
+                                       id="picture" lang="es" name="{{ form.picture.html_name }}">
                                 <label class="custom-file-label" for="picture">Seleccionar Archivo</label>
                                 <div class="invalid-feedback">
                                     {{ form.picture.errors }}
@@ -35,31 +36,46 @@
 
                     <hr>
 
+                    {# Website #}
                     <div class="form-group mt-5">
                         <label for="website">Website</label>
-                        <input class="form-control{% if form.website.errors %} is-invalid {% endif %}" type="url"
-                               name="website" placeholder="Website"
-                               value="{{ form.website.value }}" id="website"/>
+                        <input class="form-control{% if form.website.errors %} is-invalid {% endif %}" id="website"
+                               name="{{ form.website.html_name }}" placeholder="Website" type="url" value="
+                                {% if form.errors %}
+                                    {{ form.website.value }}
+                                {% else %}
+                                    {{ profile.website }}
+                                {% endif %}
+                        "/>
                         <div class="invalid-feedback">
                             {{ form.website.errors }}
                         </div>
                     </div>
 
+                    {# Biography #}
                     <div class="form-group">
                         <label for="biography">Biografía</label>
                         <textarea class="form-control{% if form.biography.errors %} is-invalid {% endif %}"
-                                  name="biography"
-                                  id="biography">{{ form.biography.value }}</textarea>
+                                  name="{{ form.biography.html_name }}"
+                                  id="biography">{% if form.errors %}{{ form.biography.value }}{% else %}
+                            {{ profile.biography }}{% endif %}</textarea>
                         <div class="invalid-feedback">
                             {{ form.biography.errors }}
                         </div>
                     </div>
 
+                    {# Phone number #}
                     <div class="form-group">
                         <label for="phone_number">Celular</label>
                         <input class="form-control{% if form.phone_number.errors %} is-invalid {% endif %}"
-                               type="number" name="phone_number" placeholder="Phone number"
-                               value="{{ form.phone_number.value }}" id="phone_number"/>
+                               id="phone_number" name="{{ form.phone_number.html_name }}" placeholder="Phone number"
+                               type="text" value="
+                                {% if form.errors %}
+                                    {{ form.phone_number.value }}
+                                {% else %}
+                                    {{ profile.phone_number }}
+                                {% endif %}
+                        "/>
                         <div class="invalid-feedback">
                             {{ form.phone_number.errors }}
                         </div>
