@@ -60,7 +60,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('users:login')
     else:
         form = SignupForm()
 
@@ -73,4 +73,4 @@ def signup(request):
 def logout_view(request):
     """Logout View"""
     logout(request)
-    return redirect('login')
+    return redirect('users:login')

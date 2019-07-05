@@ -11,7 +11,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
-                    <a href="{% url 'update_profile' %}">
+                    <a href="{% url 'users:update' %}">
                         {% if request.user.profile.picture %}
                             <img src="{{ request.user.profile.picture.url }}" height="35"
                                  class="d-inline-block align-top rounded-circle" alt=""/>
@@ -23,13 +23,13 @@
                 </li>
 
                 <li class="nav-item nav-icon">
-                    <a href="{% url 'create_posts' %}">
+                    <a href="{% url 'posts:create' %}">
                         <i class="fas fa-plus"></i>
                     </a>
                 </li>
 
                 <li class="nav-item nav-icon">
-                    <a href="{% url 'logout' %}">
+                    <a href="{% url 'users:logout' %}">
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
                 </li>

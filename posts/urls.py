@@ -19,5 +19,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('new/', views.create_posts, name='create_posts')
+    path('new/', views.create_posts, name='create')
 ]

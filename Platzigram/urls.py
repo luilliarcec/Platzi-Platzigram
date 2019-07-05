@@ -26,6 +26,6 @@ from Platzigram import views
 urlpatterns = [
     path('', views.list_posts, name='feed'),
     path('admin/', admin.site.urls, name='admin'),
-    path('posts/', include('posts.urls'), name='posts'),
-    path('users/', include('users.urls'), name='users')
+    path('posts/', include(('posts.urls', 'posts'), namespace='posts')),
+    path('users/', include(('users.urls', 'users'), namespace='users'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
