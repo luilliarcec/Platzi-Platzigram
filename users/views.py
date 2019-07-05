@@ -3,13 +3,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-# Exceptions
-from django.db.utils import IntegrityError
 # Models
 from django.contrib.auth.models import User
 from users.models import Profile
 # Forms
-from users.forms import ProfileForm
+from users.forms import ProfileForm, SignupForm
 
 
 # Create your views here.
@@ -59,30 +57,16 @@ def login_view(request):
 def signup(request):
     """Signup View"""
     if request.method == 'POST':
-        data = request.POST
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = SignupForm()
 
-        if data['password'] != data['password_confirmation']:
-            return render(request, 'users/signup.html', {
-                'error': 'Su contraseñas no coinciden'
-            })
-
-        try:
-            user = User.objects.create_user(username=data['username'], password=data['password'])
-            user.first_name = data['first_name']
-            user.last_name = data['last_name']
-            user.email = data['email']
-            user.save()
-
-            profile = Profile(user=user)
-            profile.save()
-        except IntegrityError:
-            return render(request, 'users/signup.html', {
-                'error': 'El username especificado ya existe'
-            })
-
-        return redirect('login')
-
-    return render(request, 'users/signup.html')
+    return render(request, 'users/signup.html', {
+        'form': form,
+    })
 
 
 @login_required
