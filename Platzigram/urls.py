@@ -21,14 +21,11 @@ from django.urls import path
 from django.conf.urls import include
 
 # Platzigram
-from . import views
+from Platzigram import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('hello-world/', views.hello_world),
-    path('sorted/', views.sorted_number),
-    path('hi/<str:name>/<int:age>', views.say_hi),
-
+    path('', views.list_posts, name='feed'),
+    path('admin/', admin.site.urls, name='admin'),
     path('posts/', include('posts.urls'), name='posts'),
     path('users/', include('users.urls'), name='users')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

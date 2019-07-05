@@ -40,13 +40,8 @@
                     <div class="form-group mt-5">
                         <label for="website">Website</label>
                         <input class="form-control{% if form.website.errors %} is-invalid {% endif %}" id="website"
-                               name="{{ form.website.html_name }}" placeholder="Website" type="url" value="
-                                {% if form.errors %}
-                                    {{ form.website.value }}
-                                {% else %}
-                                    {{ profile.website }}
-                                {% endif %}
-                        "/>
+                               name="{{ form.website.html_name }}" placeholder="Website" type="url"
+                               value="{% if form.errors %}{{ form.website.value }}{% else %}{{ profile.website }}{% endif %}"/>
                         <div class="invalid-feedback">
                             {{ form.website.errors }}
                         </div>
@@ -57,8 +52,7 @@
                         <label for="biography">Biografía</label>
                         <textarea class="form-control{% if form.biography.errors %} is-invalid {% endif %}"
                                   name="{{ form.biography.html_name }}"
-                                  id="biography">{% if form.errors %}{{ form.biography.value }}{% else %}
-                            {{ profile.biography }}{% endif %}</textarea>
+                                  id="biography">{% if form.errors %}{{ form.biography.value }}{% else %}{{ profile.biography }}{% endif %}</textarea>
                         <div class="invalid-feedback">
                             {{ form.biography.errors }}
                         </div>
@@ -69,13 +63,8 @@
                         <label for="phone_number">Celular</label>
                         <input class="form-control{% if form.phone_number.errors %} is-invalid {% endif %}"
                                id="phone_number" name="{{ form.phone_number.html_name }}" placeholder="Phone number"
-                               type="text" value="
-                                {% if form.errors %}
-                                    {{ form.phone_number.value }}
-                                {% else %}
-                                    {{ profile.phone_number }}
-                                {% endif %}
-                        "/>
+                               type="text"
+                               value="{% if form.errors %}{{ form.phone_number.value }}{% else %}{{ profile.phone_number }}{% endif %}"/>
                         <div class="invalid-feedback">
                             {{ form.phone_number.errors }}
                         </div>
@@ -86,13 +75,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block js %}
-    <script src="{% static 'js/bs-custom-file-input.min.js' %}"></script>
-    <script>
-        $(document).ready(function () {
-            bsCustomFileInput.init()
-        });
-    </script>
 {% endblock %}

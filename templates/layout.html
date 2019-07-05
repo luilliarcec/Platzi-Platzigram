@@ -25,6 +25,12 @@
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/bs-custom-file-input.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        bsCustomFileInput.init()
+    });
+</script>
 {% block js %}{% endblock %}
 </body>
 </html>
