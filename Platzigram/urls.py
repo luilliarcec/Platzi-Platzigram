@@ -24,7 +24,7 @@ from django.conf.urls import include
 from Platzigram import views
 
 urlpatterns = [
-    path('', views.list_posts, name='feed'),
+    path('', views.PostsFeedView.as_view(), name='feed'),
     path('admin/', admin.site.urls, name='admin'),
     path('posts/', include(('posts.urls', 'posts'), namespace='posts')),
     path('users/', include(('users.urls', 'users'), namespace='users'))

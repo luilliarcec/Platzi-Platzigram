@@ -12,7 +12,7 @@ html, body {
 
 #main-navbar {
     background: #fff;
-    border-bottom: 1px solid rgba(0,0,0,.0975);
+    border-bottom: 1px solid rgba(0, 0, 0, .0975);
 }
 
 .post-container {
@@ -29,16 +29,48 @@ html, body {
     margin-left: 1.2em;
     font-weight: 100;
 }
+
 .nav-icon a:hover {
     color: #1d5e72;;
 }
+
 #profile-box {
     background: #fff;
-    border: 1px solid rgba(0,0,0,.0975);
+    border: 1px solid rgba(0, 0, 0, .0975);
     border-radius: 1px;
     margin-top: 6em;
 }
 
 #user-posts #post-thumb {
     background: #fff;
+}
+
+#user-posts img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+    #user-posts img {
+        height: 250px;
+        width: 250px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 1024px) {
+    #user-posts img {
+        height: 270px;
+        width: 270px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 1440px) {
+    #user-posts img {
+        height: 320px;
+        width: 320px;
+        object-fit: cover;
+    }
 }
