@@ -24,15 +24,20 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['website', 'biography', 'phone_number', 'picture']
 
+    # Una forma de devolver los campos generados automaticamente con clases de bootstrap (CSS3)
     def __init__(self, *args, **kwargs):
+        """Sobreescribimos el constructor para añadir bootstrap a los campos"""
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs.update({'class': 'form-control', 'placeholder': self.snake_to_word(field)})
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': self.snake_to_word(field)
+            })
 
     @staticmethod
     def snake_to_word(word):
-        """ Change snake case to word """
-        return ' '.join(x.capitalize() or '_' for x in word.split('_'))
+        """Modifica el nombre del field para devolverlo como placeholder"""
+        return ' '.join(charapter.capitalize() or '_' for charapter in word.split('_'))
 
 
 class SignupForm(forms.Form):
