@@ -7,7 +7,7 @@ from django.core import validators
 from users.models import Profile
 
 
-class ProfileForm(forms.Form):
+class ProfileForm(forms.ModelForm):
     """Formulario y validación de Profile"""
     website = forms.URLField(max_length=200, required=True)
     biography = forms.CharField(max_length=500, required=True)
@@ -20,13 +20,19 @@ class ProfileForm(forms.Form):
     ], min_length=10, max_length=20)
     picture = forms.ImageField(required=True)
 
-    # def clean_picture(self):
-    #     """Imagen requerida si no tiene"""
-    #     picture = self.cleaned_data['picture']
-    #     picture_exists = Profile.objects.filter(picture=picture).exists()
-    #     if not picture and not picture_exists:
-    #         raise forms.ValidationError('La imagen es requerida')
-    #     return picture
+    class Meta:
+        model = Profile
+        fields = ['website', 'biography', 'phone_number', 'picture']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control', 'placeholder': self.snake_to_word(field)})
+
+    @staticmethod
+    def snake_to_word(word):
+        """ Change snake case to word """
+        return ' '.join(x.capitalize() or '_' for x in word.split('_'))
 
 
 class SignupForm(forms.Form):

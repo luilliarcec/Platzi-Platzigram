@@ -16,8 +16,9 @@ Including another URLconf
 from django.urls import path
 
 # Django
-from . import views
+from posts import views
 
 urlpatterns = [
-    path('new/', views.create_posts, name='create')
+    path('new/', views.PostCreateView.as_view(), name='create'),
+    path('<str:username>/<int:pk>', views.PostDetailView.as_view(), name='detail')
 ]
