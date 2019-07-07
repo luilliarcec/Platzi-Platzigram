@@ -1,0 +1,1 @@
+web: gunicorn Platzigram.wsgi --log-file -
