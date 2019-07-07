@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4i$5cv6q9urfbhcf)9ynksh*!3kk^@gb&ci8g(g1+@(i-$*aj0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -83,13 +83,11 @@ WSGI_APPLICATION = 'Platzigram.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'platzigram',
-        'USER': 'postgres',
-        'PASSWORD': 'sa',
-        'HOST': '127.0.0.1',
+        'NAME': 'd2auaoljj3dkea',
+        'USER': 'rfkqnrdflfpajq',
+        'PASSWORD': '28bfcff25fda0519d5be0001c086830b8cec5a244913b98e750a3ea6705b8a23',
+        'HOST': 'ec2-107-21-216-112.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
