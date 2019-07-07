@@ -54,6 +54,7 @@ MIDDLEWARE = [
 
     # Local middleware
     'middleware.users.ProfileCompletionMiddleware',
+    'middleware.users.RedirectFeedUserForLoginActiveMiddleware',
 ]
 
 ROOT_URLCONF = 'Platzigram.urls'
@@ -146,3 +147,5 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/2.2/topics/auth/default/#django.contrib.auth.logout
 
 LOGIN_URL = '/users/login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/users/login'

@@ -3,13 +3,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import views as auth_views
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, FormView, UpdateView
 # Models
 from django.contrib.auth.models import User
 from posts.models import Post
-from users.models import Profile
 # Forms
 from users.forms import ProfileForm, SignupForm
 
@@ -63,26 +63,12 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         })
 
 
-def login_view(request):
-    """Login View"""
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-
-        if user:
-            login(request, user)
-            return redirect('feed')
-        else:
-            return render(request, 'users/login.html', {
-                'error': 'Credenciales incorrectas'
-            })
-
-    return render(request, 'users/login.html')
+class LoginView(auth_views.LoginView):
+    """Clase Based View para logear un usuario"""
+    template_name = 'users/login.html'
+    redirect_authenticated_user = True
 
 
-@login_required
-def logout_view(request):
-    """Logout View"""
-    logout(request)
-    return redirect('users:login')
+class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
+    """Clase Based View para logout un usuario"""
+    pass

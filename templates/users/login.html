@@ -13,9 +13,9 @@
             <input type="password" class="form-control" id="password" placeholder="Password" name="password">
         </div>
 
-        {% if error %}
+        {% if form.errors %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ error }}
+                {{ form.errors }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
