@@ -1,0 +1,59 @@
+{% extends 'users/layout.html' %}
+
+{% block container %}
+    <form method="post" action="{% url 'users:signup' %}">
+
+        {% csrf_token %}
+
+        <div class="form-group mt-5">
+            <input type="text" class="form-control {% if form.first_name.errors %}is-invalid{% endif %}"
+                   id="first_name" placeholder="Nombre" name="first_name">
+            <div class="invalid-feedback">
+                {{ form.first_name.errors }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control {% if form.last_name.errors %}is-invalid{% endif %}"
+                   id="last_name" placeholder="Apellido" name="last_name">
+            <div class="invalid-feedback">
+                {{ form.last_name.errors }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="email" class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+                   id="email" placeholder="Su email" name="email">
+            <div class="invalid-feedback">
+                {{ form.email.errors }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control {% if form.username.errors %}is-invalid{% endif %}"
+                   id="username" placeholder="Username" name="username">
+            <div class="invalid-feedback">
+                {{ form.username.errors }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control {% if form.password.errors %}is-invalid{% endif %}"
+                   id="password" placeholder="Password" name="password">
+            <div class="invalid-feedback">
+                {{ form.password.errors }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control {% if form.password_confirmation.errors %}is-invalid{% endif %}"
+                   id="password_confirmation" placeholder="Confirme su password" name="password_confirmation">
+            <div class="invalid-feedback">
+                {{ form.password_confirmation.errors }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block mt-5">Registrarse</button>
+        <p class="mt-3">¿Tienes una cuenta? <a href="{% url 'users:login' %}" class="card-link">Inicia sesión</a></p>
+    </form>
+{% endblock %}

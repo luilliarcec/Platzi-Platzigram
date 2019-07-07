@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block container %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-6 pt-3 pb-3" id="profile-box">
+                <h4 class="mb-4">Postea una nueva foto!</h4>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="user" value="{{ request.user.pk }}"/>
+                    <input type="hidden" name="profile" value="{{ request.user.profile.pk }}"/>
+
+                    {# Title field #}
+                    <div class="form-group">
+                        <label for="title">Título</label>
+                        <input class="form-control {% if form.title.errors %}is-invalid{% endif %}" type="text"
+                               name="title" placeholder="Titulo" id="title">
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}{{ error }}{% endfor %}
+                        </div>
+                    </div>
+
+                    {# Photo field #}
+                    <div class="input-group-lg">
+                        <label>Comparta su foto:</label>
+                        <div class="custom-file">
+                            <input type="file"
+                                   class="custom-file-input{% if form.photo.errors %} is-invalid {% endif %}"
+                                   id="picture" lang="es" name="{{ form.photo.html_name }}">
+                            <label class="custom-file-label" for="picture">Seleccionar Archivo</label>
+                            <div class="invalid-feedback">
+                                {{ form.photo.errors }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-5">Postear!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
