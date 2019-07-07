@@ -18,21 +18,13 @@ class ProfileForm(forms.ModelForm):
             code='invalid_phone_number'
         ),
     ], min_length=10, max_length=20)
-    picture = forms.ImageField(required=True)
+    # Cuando se usa una Base View de update ya valida
+    # si existe ese campo en la base de datos y no lo vuelve a reuquerir
+    picture = forms.ImageField()
 
     class Meta:
         model = Profile
         fields = ['website', 'biography', 'phone_number', 'picture']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].widget.attrs.update({'class': 'form-control', 'placeholder': self.snake_to_word(field)})
-
-    @staticmethod
-    def snake_to_word(word):
-        """ Change snake case to word """
-        return ' '.join(x.capitalize() or '_' for x in word.split('_'))
 
 
 class SignupForm(forms.Form):
